@@ -4,7 +4,8 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class Lexer {
-    private char current;
+    //private char current;
+    private int current;
     private Reader reader;
 
     public Lexer(Reader reader) throws LexerException
@@ -25,31 +26,30 @@ public class Lexer {
     public Lexeme getLexeme() throws LexerException
     {
         try {
-            int temp = current;
-            while (Character.isSpaceChar(temp)) {
-                temp = reader.read();
+            //int temp = current;
+            while (Character.isSpaceChar(current)) {
+                current = reader.read();
             }
-            if(temp == -1)
+            if(current == -1)
                 return new Lexeme(LexemeType.EOF);
-            current = (char)temp;
+
 
 
             if (Character.isDigit(current))
             {
                 StringBuilder builder = new StringBuilder();
-                while(Character.isDigit(temp)) {
-                    builder.append((char)temp);
-                    temp = reader.read();
+                while(Character.isDigit(current)) {
+                    builder.append((char)current);
+                    current = reader.read();
                 }
 
-                current = (char)temp;
                 return new Lexeme(builder.toString());
             }
             else
             {
-                char mathSymbol = current;
+                int mathSymbol = current;
 
-                current = (char)reader.read();      //это хорошая идея? не надо проверять на -1?
+                current = reader.read();      //это хорошая идея? не надо проверять на -1?
 
                 switch (mathSymbol)
                 {
