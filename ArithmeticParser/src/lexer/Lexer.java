@@ -47,30 +47,30 @@ public class Lexer {
             }
             else
             {
-                Lexeme l;
-                switch (current)
+                char mathSymbol = current;
+
+                current = (char)reader.read();      //это хорошая идея? не надо проверять на -1?
+
+                switch (mathSymbol)
                 {
                 //TODO: может, поменять как-то?
                     case ('+'):
-                        l =  new Lexeme(LexemeType.PLUS);
+                        return new Lexeme(LexemeType.PLUS);
                     case ('-'):
-                        l =  new Lexeme(LexemeType.MINUS);
+                        return new Lexeme(LexemeType.MINUS);
                     case ('*'):
-                        l =  new Lexeme(LexemeType.ASTERISK);
+                        return new Lexeme(LexemeType.ASTERISK);
                     case ('/'):
-                        l =  new Lexeme(LexemeType.SLASH);
+                        return new Lexeme(LexemeType.SLASH);
                     case ('('):
-                        l =  new Lexeme(LexemeType.LBRACE);
+                        return new Lexeme(LexemeType.LBRACE);
                     case (')'):
-                        l =  new Lexeme(LexemeType.RBRACE);
+                        return new Lexeme(LexemeType.RBRACE);
                     case ('^'):
-                        l =  new Lexeme(LexemeType.POWER);
-
+                        return new Lexeme(LexemeType.POWER);    //
                     default:
                         throw new LexerException();
                 }
-                //прочитать новый current!
-                return l;
             }
         }
         catch (IOException e)

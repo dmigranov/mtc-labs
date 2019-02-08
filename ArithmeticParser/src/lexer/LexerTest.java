@@ -17,5 +17,7 @@ class LexerTest {
         assertEquals(new Lexeme(LexemeType.PLUS), l);
         l = lexer.getLexeme();
         assertEquals(new Lexeme("5"), l);
+        l = lexer.getLexeme();
+        assertEquals(new Lexeme(LexemeType.EOF), l);
     }
 }
