@@ -41,29 +41,36 @@ public class Lexer {
                     builder.append((char)temp);
                     temp = reader.read();
                 }
-                if(temp == -1)
-                    return new Lexeme(LexemeType.EOF);
+
                 current = (char)temp;
                 return new Lexeme(builder.toString());
             }
-            else switch (current) {
+            else
+            {
+                Lexeme l;
+                switch (current)
+                {
                 //TODO: может, поменять как-то?
-                case ('+'):
-                    return new Lexeme(LexemeType.PLUS);
-                case ('-'):
-                    return new Lexeme(LexemeType.MINUS);
-                case ('*'):
-                    return new Lexeme(LexemeType.ASTERISK);
-                case ('/'):
-                    return new Lexeme(LexemeType.SLASH);
-                case ('('):
-                    return new Lexeme(LexemeType.LBRACE);
-                case (')'):
-                    return new Lexeme(LexemeType.RBRACE);
-                case ('^'):
-                    return new Lexeme(LexemeType.POWER);    //
-                default:
-                    throw new LexerException();
+                    case ('+'):
+                        l =  new Lexeme(LexemeType.PLUS);
+                    case ('-'):
+                        l =  new Lexeme(LexemeType.MINUS);
+                    case ('*'):
+                        l =  new Lexeme(LexemeType.ASTERISK);
+                    case ('/'):
+                        l =  new Lexeme(LexemeType.SLASH);
+                    case ('('):
+                        l =  new Lexeme(LexemeType.LBRACE);
+                    case (')'):
+                        l =  new Lexeme(LexemeType.RBRACE);
+                    case ('^'):
+                        l =  new Lexeme(LexemeType.POWER);
+
+                    default:
+                        throw new LexerException();
+                }
+                //прочитать новый current!
+                return l;
             }
         }
         catch (IOException e)

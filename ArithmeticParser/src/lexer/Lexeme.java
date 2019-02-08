@@ -20,7 +20,7 @@ public class Lexeme {
         if(!(obj instanceof Lexeme))
             return false;
         Lexeme other = (Lexeme)obj;
-        if(text != null && text.equals(other.text) && other.type == type)
+        if(other.type == type && ((text == null && other.text == null) || text.equals(other.text)))
             return true;
         return false;
 
