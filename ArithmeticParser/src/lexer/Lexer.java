@@ -30,23 +30,38 @@ public class Lexer {
                 temp = reader.read();
             }
             if(temp == -1)
-                throw new LexerException();
+                return new Lexeme(LexemeType.EOF);
             current = (char)temp;
 
 
             if (Character.isDigit(current))
             {
-
-            } else switch (current) {
+                StringBuilder builder = new StringBuilder();
+                while(Character.isDigit(temp)) {
+                    builder.append((char)temp);
+                    temp = reader.read();
+                }
+                if(temp == -1)
+                    return new Lexeme(LexemeType.EOF);
+                current = (char)temp;
+                return new Lexeme(builder.toString());
+            }
+            else switch (current) {
+                //TODO: может, поменять как-то?
                 case ('+'):
+                    return new Lexeme(LexemeType.PLUS);
                 case ('-'):
+                    return new Lexeme(LexemeType.MINUS);
                 case ('*'):
+                    return new Lexeme(LexemeType.ASTERISK);
                 case ('/'):
+                    return new Lexeme(LexemeType.SLASH);
                 case ('('):
+                    return new Lexeme(LexemeType.LBRACE);
                 case (')'):
+                    return new Lexeme(LexemeType.RBRACE);
                 case ('^'):
-                    return new Lexeme();    //
-                break;
+                    return new Lexeme(LexemeType.POWER);    //
                 default:
                     throw new LexerException();
             }
@@ -57,13 +72,4 @@ public class Lexer {
         }
     }
 
-    private void readNextChar()
-    {
-
-    }
-
-    private boolean isMathSymbol()
-    {
-
-    }
 }
