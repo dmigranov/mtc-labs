@@ -42,7 +42,7 @@ public class Parser {
             else
             {
                 current = lexer.getLexeme();
-                temp += parseTerm();
+                temp -= parseTerm();
             }
         }
 
@@ -58,12 +58,12 @@ public class Parser {
             if (current.getType() == LexemeType.ASTERISK)
             {
                 current = lexer.getLexeme();
-                temp += parseFactor();
+                temp *= parseFactor();
             }
             else
             {
                 current = lexer.getLexeme();
-                temp += parseFactor();
+                temp /= parseFactor();
             }
         }
 
@@ -111,6 +111,6 @@ public class Parser {
             return temp;
         }
 
-        return 0;
+        throw new ParserException();
     }
 }

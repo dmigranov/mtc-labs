@@ -40,5 +40,7 @@ class LexerTest {
         assertEquals(new Lexeme(LexemeType.ASTERISK), l);
         l = lexer.getLexeme();
         assertEquals(new Lexeme(LexemeType.EOF), l);
+
+        assertThrows(LexerException.class, () -> new Lexer(new StringReader("g")).getLexeme());
     }
 }
