@@ -1,6 +1,8 @@
 package lexer;
 
-public class LexerException extends Exception {
+import parser.ParserException;
+
+public class LexerException extends ParserException {
     public LexerException()
     {
         super();

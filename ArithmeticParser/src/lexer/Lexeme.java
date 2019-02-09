@@ -26,4 +26,16 @@ public class Lexeme {
 
 
     }
+
+    public LexemeType getType() {
+        return type;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }
