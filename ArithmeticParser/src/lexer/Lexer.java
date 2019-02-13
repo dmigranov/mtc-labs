@@ -26,14 +26,11 @@ public class Lexer {
     public Lexeme getLexeme() throws LexerException
     {
         try {
-            //int temp = current;
             while (Character.isSpaceChar(current)) {
                 current = reader.read();
             }
             if(current == -1)
                 return new Lexeme(LexemeType.EOF);
-
-
 
             if (Character.isDigit(current))
             {
@@ -49,11 +46,10 @@ public class Lexer {
             {
                 int mathSymbol = current;
 
-                current = reader.read();      //это хорошая идея? не надо проверять на -1?
+                current = reader.read();
 
                 switch (mathSymbol)
                 {
-                //TODO: может, поменять как-то?
                     case ('+'):
                         return new Lexeme(LexemeType.PLUS);
                     case ('-'):

@@ -23,8 +23,6 @@ public class Lexeme {
         if(other.type == type && ((text == null && other.text == null) || text.equals(other.text)))
             return true;
         return false;
-
-
     }
 
     public LexemeType getType() {

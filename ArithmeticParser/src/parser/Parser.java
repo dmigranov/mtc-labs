@@ -25,7 +25,6 @@ public class Parser {
         if(current.getType() != LexemeType.EOF)
             throw new ParserException();
         return temp;
-
     }
 
     private int parseExpression() throws ParserException
