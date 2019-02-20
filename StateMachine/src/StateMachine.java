@@ -68,10 +68,10 @@ class StateMachine {
             char c = (char)t;
 
             currentState = currentState.getNeighbour(c);
-            if(currentState == null)
-                return false;   //соседа по такому символу нет... или лучше сделать break?
+            if(currentState == null)    //соседа по такому символу нет...
+                //return false;
                 //break;  //типа если при чтении
-                //throw new StateMachineException("Переход по символу " + c + " невозможен");
+                throw new StateMachineException("Transition is impossible");
         }
         return currentState.isFinal();
     }

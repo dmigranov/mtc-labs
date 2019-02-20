@@ -5,30 +5,31 @@ import static org.junit.jupiter.api.Assertions.*;
 class StateMachineTest {
 
     @org.junit.jupiter.api.Test
-    void parse() throws IOException {
+    void parse() throws IOException, StateMachineException {
         Reader stateMachineReader;
-        StateMachine machine;
 
+        StateMachine m1;
         stateMachineReader = new FileReader("machine1.txt");
-        machine = new StateMachine(stateMachineReader);
-        assertTrue(machine.parse(new StringReader("aaabbaba")));
-        assertFalse(machine.parse(new StringReader("aaabbava")));
-        assertFalse(machine.parse(new StringReader("babaaa")));
-        assertFalse(machine.parse(new StringReader("aabaabaaa")));
+        m1 = new StateMachine(stateMachineReader);
+        assertTrue(m1.parse(new StringReader("aaabbaba")));
+        assertThrows(StateMachineException.class, () -> m1.parse(new StringReader("aaabbava")));
+        assertFalse(m1.parse(new StringReader("babaaa")));
+        assertFalse(m1.parse(new StringReader("aabaabaaa")));
 
-
+        StateMachine m2;
         stateMachineReader = new FileReader("machine2.txt");
-        machine = new StateMachine(stateMachineReader);
-        assertFalse(machine.parse(new StringReader("aaabbaba")));
-        assertFalse(machine.parse(new StringReader("aabbava")));    //так должно быть? вопрос в том, как быть с переходами, не определёнными в файле
-        assertTrue(machine.parse(new StringReader("babaaa")));
-        assertTrue(machine.parse(new StringReader("aabaabaaa")));
+        m2 = new StateMachine(stateMachineReader);
+        assertFalse(m2.parse(new StringReader("aaabbaba")));
+        assertThrows(StateMachineException.class, () -> m2.parse(new StringReader("aabbava")));    //так должно быть? вопрос в том, как быть с переходами, не определёнными в файле
+        assertTrue(m2.parse(new StringReader("babaaa")));
+        assertTrue(m2.parse(new StringReader("aabaabaaa")));
 
+        StateMachine m3;
         stateMachineReader = new FileReader("machine3.txt");
-        machine = new StateMachine(stateMachineReader);
-        assertTrue(machine.parse(new StringReader("abbaababba")));
-        assertTrue(machine.parse(new StringReader("baabbaaabb")));
-        assertFalse(machine.parse(new StringReader("baabbaaaba")));
-        assertFalse(machine.parse(new StringReader("aaabbaaabb")));
+        m3 = new StateMachine(stateMachineReader);
+        assertTrue(m3.parse(new StringReader("abbaababba")));
+        assertTrue(m3.parse(new StringReader("baabbaaabb")));
+        assertFalse(m3.parse(new StringReader("baabbaaaba")));
+        assertFalse(m3.parse(new StringReader("aaabbaaabb")));
     }
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class Main {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, StateMachineException
     {
         if(args.length < 2)
             System.exit(1);
