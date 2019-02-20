@@ -1,0 +1,15 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
+
+public class Main {
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        if(args.length < 3)
+            System.exit(1);
+        Reader stateMachineReader = new FileReader(args[0]);
+        Reader wordReader = new FileReader(args[1]);
+
+        StateMachine machine = new StateMachine(stateMachineReader);
+    }
+}
