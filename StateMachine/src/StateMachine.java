@@ -55,12 +55,13 @@ class StateMachine {
             from.addNeighbour(c, to);
         }
 
-        currentState = states.get(0);
     }
 
 
-    boolean parse(Reader reader) throws IOException
+    boolean parse(Reader reader) throws IOException, StateMachineException
     {
+        currentState = states.get(0);
+
         int t;
         while((t = reader.read()) != - 1)
         {
@@ -68,7 +69,9 @@ class StateMachine {
 
             currentState = currentState.getNeighbour(c);
             if(currentState == null)
-                return false;   //соседа по такому символу нет..
+                return false;   //соседа по такому символу нет... или лучше сделать break?
+                //break;  //типа если при чтении
+                //throw new StateMachineException("Переход по символу " + c + " невозможен");
         }
         return currentState.isFinal();
     }
