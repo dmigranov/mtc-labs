@@ -12,10 +12,6 @@ class StateMachine {
 
     public StateMachine(Reader reader) throws IOException
     {
-        /*State startState = new State( false);
-        states.put(0, startState);*/
-
-
         BufferedReader bufferedReader = new BufferedReader(reader);
         String finalStatesString = bufferedReader.readLine();              //список финальных состояний
         String[] splitted = finalStatesString.split(" ");

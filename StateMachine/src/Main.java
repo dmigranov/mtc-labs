@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -17,6 +16,5 @@ public class Main {
             System.out.println("OK");
         else
             System.out.println("Not OK");
-
     }
 }
