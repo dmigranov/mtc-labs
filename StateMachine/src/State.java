@@ -2,13 +2,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class State {
-    boolean isFinal;
+    private boolean isFinal;
     //int number;
     private Map<Character, State> neighbourStates = new HashMap<>();
 
     public State(boolean isFinal) {
         //this.number = number;
-        this.isFinal = false;
+        this.isFinal = isFinal;
     }
 
     public void setFinal()
@@ -19,5 +19,14 @@ public class State {
     public void addNeighbour(char c, State state)
     {
         neighbourStates.put(c, state);
+    }
+
+    public State getNeighbour(char c)
+    {
+        return neighbourStates.get(c);
+    }
+
+    public boolean isFinal() {
+        return isFinal;
     }
 }

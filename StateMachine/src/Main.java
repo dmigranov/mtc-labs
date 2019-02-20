@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException, IOException
+    public static void main(String[] args) throws IOException
     {
         if(args.length < 2)
             System.exit(1);
@@ -12,5 +12,11 @@ public class Main {
         Reader wordReader = new FileReader(args[1]);
 
         StateMachine machine = new StateMachine(stateMachineReader);
+        boolean parsed = machine.parse(wordReader);
+        if(parsed)
+            System.out.println("OK");
+        else
+            System.out.println("Not OK");
+
     }
 }
