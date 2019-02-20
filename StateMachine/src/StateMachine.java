@@ -7,21 +7,29 @@ import java.util.Scanner;
 
 public class StateMachine {
     private Map<Integer, State> states = new HashMap<>();
-    State startState;
 
     State currentState;
 
     public StateMachine(Reader reader) throws IOException
     {
-        startState = new State(0, false);
-        states.pu
+        /*State startState = new State( false);
+        states.put(0, startState);*/
+
 
         BufferedReader bufferedReader = new BufferedReader(reader);
         String finalStatesString = bufferedReader.readLine();              //список финальных состояний
         String[] splitted = finalStatesString.split(" ");
         for(String s : splitted)
         {
-            int number =
+            int number = Integer.parseInt(s);
+            states.put(number, new State(true));
         }
+        if(!states.containsKey(0))
+        {
+            State startState = new State( false);
+            states.put(0, startState);
+        }
+
+
     }
 }

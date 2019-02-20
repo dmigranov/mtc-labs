@@ -1,11 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.Reader;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException
+    public static void main(String[] args) throws FileNotFoundException, IOException
     {
-        if(args.length < 3)
+        if(args.length < 2)
             System.exit(1);
         Reader stateMachineReader = new FileReader(args[0]);
         Reader wordReader = new FileReader(args[1]);
