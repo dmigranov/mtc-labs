@@ -25,7 +25,7 @@ class NondeterministicStateMachine {
         String s;
         while((s = bufferedReader.readLine()) != null)
         {
-            //todo: возможно, стоит сделать как в тетрадке (формат)
+            //возможно, стоит сделать как в тетрадке (формат)? спросить
             splitted = s.split(" ");
             int fromNumber = Integer.parseInt(splitted[0]);
             int toNumber = Integer.parseInt(splitted[2]);
@@ -51,7 +51,7 @@ class NondeterministicStateMachine {
     }
 
 
-    boolean parse(Reader reader) throws IOException, StateMachineException
+    boolean parse(Reader reader) throws IOException
     {
         Deque<Configuration> stack = new ArrayDeque<>();
         String s = new BufferedReader(reader).readLine();
@@ -72,7 +72,6 @@ class NondeterministicStateMachine {
 
             char c = s.charAt(pos);
             List<State> neighbours = state.getNeighbours(c);
-
             if(neighbours == null)
                 continue;
 
@@ -80,8 +79,8 @@ class NondeterministicStateMachine {
             {
                 stack.push(new Configuration(neighbour, pos+1));
             }
-
         }
+
         return false;
     }
 }
