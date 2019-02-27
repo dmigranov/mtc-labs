@@ -6,11 +6,6 @@ import java.util.*;
 class NondeterministicStateMachine {
     private Map<Integer, State> states = new HashMap<>();
 
-
-    private Deque<Configuration> stack = new ArrayDeque<>();
-
-    private State currentState;
-
     public NondeterministicStateMachine(Reader reader) throws IOException
     {
         BufferedReader bufferedReader = new BufferedReader(reader);
@@ -58,6 +53,7 @@ class NondeterministicStateMachine {
 
     boolean parse(Reader reader) throws IOException, StateMachineException
     {
+        Deque<Configuration> stack = new ArrayDeque<>();
         String s = new BufferedReader(reader).readLine();
 
         Configuration configuration = new Configuration(states.get(0), 0);  //-1
@@ -68,19 +64,24 @@ class NondeterministicStateMachine {
             configuration = stack.pop();
             int pos = configuration.getPosition();
             State state = configuration.getState();
+            if(pos == s.length())   //прочли всё
+                if(state.isFinal())
+                    return true;
+                else
+                    continue;
+
             char c = s.charAt(pos);
             List<State> neighbours = state.getNeighbours(c);
 
+            if(neighbours == null)
+                continue;
+
             for(State neighbour : neighbours)
             {
-                stack.push(new Configuration(neighbour, pos++));
+                stack.push(new Configuration(neighbour, pos+1));
             }
 
-            if(currentState == null)    //соседа по такому символу нет...
-                //return false;
-                //break;  //типа если при чтении
-                throw new StateMachineException("Transition is impossible");
         }
-        return currentState.isFinal();
+        return false;
     }
 }
